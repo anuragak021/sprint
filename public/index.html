@@ -4,865 +4,1222 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SPRINT — Smart Precision Remote Irrigation Network Technology</title>
-  <meta name="description" content="SPRINT is an IoT-based smart spraying system for precision agriculture developed at Delhi Technological University." />
-
-  <!-- Google Fonts -->
+  <meta name="description" content="SPRINT is a remote and timer-controlled smart spraying system for precision agriculture. B.Tech ECE project by Anurag Kumar, Chirag Sikriwal and Devayush Devandra at Delhi Technological University, 2026." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ─── NAVBAR ──────────────────────────────────────────────────────────── -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">
+<!-- ──────────────────────────────────────────────────────
+     NAVBAR
+────────────────────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-s">S</span><span class="logo-print">PRINT</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#abstract"    class="nav-link">Abstract</a></li>
+      <li><a href="#problem"     class="nav-link">Problem</a></li>
+      <li><a href="#how"         class="nav-link">How It Works</a></li>
+      <li><a href="#hardware"    class="nav-link">Hardware</a></li>
+      <li><a href="#software"    class="nav-link">Software</a></li>
+      <li><a href="#results"     class="nav-link">Results</a></li>
+      <li><a href="#conclusion"  class="nav-link">Conclusion</a></li>
+      <li><a href="#team"        class="nav-link">Team</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ──────────────────────────────────────────────────────
+     HERO
+────────────────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="particle" style="--x:10%;--y:20%;--s:6px;--d:4s"></div>
+    <div class="particle" style="--x:85%;--y:15%;--s:4px;--d:6s"></div>
+    <div class="particle" style="--x:30%;--y:70%;--s:8px;--d:5s"></div>
+    <div class="particle" style="--x:70%;--y:60%;--s:5px;--d:7s"></div>
+    <div class="particle" style="--x:50%;--y:40%;--s:3px;--d:4.5s"></div>
+    <div class="particle" style="--x:20%;--y:80%;--s:7px;--d:5.5s"></div>
+    <div class="particle" style="--x:90%;--y:75%;--s:4px;--d:6.5s"></div>
+    <div class="particle" style="--x:60%;--y:10%;--s:6px;--d:3.5s"></div>
+  </div>
+
+  <!-- Animated farm SVG -->
+  <div class="hero-illustration">
+    <svg viewBox="0 0 700 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="220" width="700" height="80" fill="url(#groundGrad)" rx="0"/>
+      <!-- Crops -->
+      <g class="crop-row" style="--delay:0s">
+        <path d="M60 220 Q65 192 70 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M70 220 Q75 196 80 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M80 220 Q85 188 90 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <ellipse cx="75" cy="193" rx="13" ry="9" fill="#16a34a" opacity="0.9"/>
+      </g>
+      <g class="crop-row" style="--delay:0.3s">
+        <path d="M160 220 Q165 192 170 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M170 220 Q175 196 180 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M180 220 Q185 188 190 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <ellipse cx="175" cy="193" rx="13" ry="9" fill="#16a34a" opacity="0.9"/>
+      </g>
+      <g class="crop-row" style="--delay:0.6s">
+        <path d="M260 220 Q265 192 270 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M270 220 Q275 196 280 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M280 220 Q285 188 290 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <ellipse cx="275" cy="193" rx="13" ry="9" fill="#16a34a" opacity="0.9"/>
+      </g>
+      <g class="crop-row" style="--delay:0.9s">
+        <path d="M360 220 Q365 192 370 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M370 220 Q375 196 380 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <path d="M380 220 Q385 188 390 220" stroke="#4ade80" stroke-width="1.8" fill="none"/>
+        <ellipse cx="375" cy="193" rx="13" ry="9" fill="#16a34a" opacity="0.9"/>
+      </g>
+      <!-- ESP-01 sprayer device -->
+      <g class="sprayer">
+        <rect x="500" y="155" width="65" height="42" rx="6" fill="#1e3a2f" stroke="#4ade80" stroke-width="1.5"/>
+        <rect x="515" y="143" width="35" height="16" rx="3" fill="#166534" stroke="#4ade80" stroke-width="1"/>
+        <circle cx="532" cy="138" r="5" fill="#4ade80" class="led-blink"/>
+        <text x="505" y="173" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">ESP-01</text>
+        <text x="505" y="184" font-size="6" fill="#86efac" font-family="monospace">FIREBASE ✓</text>
+        <rect x="565" y="169" width="45" height="4" rx="2" fill="#4ade80"/>
+        <line x1="574" y1="169" x2="574" y2="220" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4 3" class="spray-line" style="--delay:0s"/>
+        <line x1="584" y1="169" x2="579" y2="220" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4 3" class="spray-line" style="--delay:0.15s"/>
+        <line x1="594" y1="169" x2="589" y2="220" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4 3" class="spray-line" style="--delay:0.3s"/>
+        <line x1="604" y1="169" x2="599" y2="220" stroke="#93c5fd" stroke-width="1.2" stroke-dasharray="4 3" class="spray-line" style="--delay:0.45s"/>
+      </g>
+      <!-- WiFi arcs -->
+      <g>
+        <path d="M508 138 Q532 118 556 138" stroke="#fbbf24" stroke-width="1.5" fill="none" class="wifi-arc" style="--delay:0s"/>
+        <path d="M498 126 Q532 98 566 126" stroke="#fbbf24" stroke-width="1.4" fill="none" class="wifi-arc" style="--delay:0.3s"/>
+        <path d="M488 114 Q532 78 576 114" stroke="#fbbf24" stroke-width="1.3" fill="none" class="wifi-arc" style="--delay:0.6s"/>
+      </g>
+      <!-- Cloud / Firebase -->
+      <g class="cloud-group">
+        <ellipse cx="140" cy="58" rx="44" ry="26" fill="#1e3a2f" opacity="0.96"/>
+        <ellipse cx="112" cy="72" rx="22" ry="16" fill="#1e3a2f" opacity="0.96"/>
+        <ellipse cx="166" cy="68" rx="24" ry="17" fill="#1e3a2f" opacity="0.96"/>
+        <text x="113" y="60" font-size="8.5" fill="#4ade80" font-family="monospace" font-weight="bold">Firebase</text>
+        <text x="117" y="72" font-size="7" fill="#86efac" font-family="monospace">RTDB ✓</text>
+      </g>
+      <!-- Data arrow cloud → device -->
+      <path d="M184 72 Q350 28 500 150" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-dasharray="7 4" class="data-flow"/>
+      <!-- Phone -->
+      <g class="phone-group">
+        <rect x="28" y="106" width="30" height="52" rx="5" fill="#1e3a2f" stroke="#4ade80" stroke-width="1.5"/>
+        <rect x="33" y="113" width="20" height="34" rx="2" fill="#052e16"/>
+        <circle cx="43" cy="152" r="3" fill="#4ade80"/>
+        <text x="34" y="123" font-size="5.5" fill="#4ade80" font-family="monospace">APP</text>
+        <text x="34" y="132" font-size="4.5" fill="#86efac" font-family="monospace">START</text>
+        <text x="34" y="140" font-size="4.5" fill="#86efac" font-family="monospace">SPRAY</text>
+      </g>
+      <!-- Phone → Cloud arrow -->
+      <path d="M58 132 Q96 96 96 78" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-dasharray="5 3" class="data-flow" style="--delay:0.4s"/>
+      <defs>
+        <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#14532d"/>
+          <stop offset="100%" stop-color="#052e16"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge reveal">
+      <span class="badge-dot"></span>
+      B.Tech Final Year Project &nbsp;·&nbsp; ECE &nbsp;·&nbsp; DTU &nbsp;·&nbsp; May 2026
+    </div>
+    <h1 class="hero-title reveal">
+      <span class="title-s">S</span>PRINT
+    </h1>
+    <p class="hero-subtitle reveal">Smart Precision Remote Irrigation Network Technology</p>
+    <p class="hero-desc reveal">
+      A remote and timer-controlled smart spraying system for precision agriculture —
+      built on <strong>ESP-01 Wi-Fi microcontroller</strong>, <strong>Firebase Realtime Database</strong>,
+      and a custom <strong>Android app</strong>. From a terrace garden in West Delhi to an open farm in Haryana.
+    </p>
+    <div class="hero-cta reveal">
+      <a href="#abstract"   class="btn btn-primary">Read the Report</a>
+      <a href="#team"       class="btn btn-ghost">Meet the Team</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat-chip"><span class="stat-num">&lt;₹1,500</span><span class="stat-label">Total Build Cost</span></div>
+      <div class="stat-chip"><span class="stat-num">&lt;1 sec</span><span class="stat-label">Cloud Latency</span></div>
+      <div class="stat-chip"><span class="stat-num">20 m</span><span class="stat-label">Wi-Fi Range</span></div>
+      <div class="stat-chip"><span class="stat-num">30+</span><span class="stat-label">Test Cycles</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     ABSTRACT
+────────────────────────────────────────────────────── -->
+<section class="section" id="abstract">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Abstract</span>
+      <h2 class="section-title">What is SPRINT?</h2>
+      <p class="section-sub">A practical IoT solution — not a theoretical exercise</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          We have developed a <strong>Smart Spraying System</strong> to help automate the water, pesticide and
+          liquid fertilizer distribution in farms or even small gardens. Our main goal was to cut down on
+          manual labour by using an <strong>ESP-01 Wi-Fi microcontroller</strong> for remote operation.
+        </p>
+        <p>
+          The hardware configuration is quite simple: ESP-01, relay, up and down voltage regulators, a
+          <strong>12V step-up/step-down pressure pump</strong> and solenoid valves, all controlled by a central
+          liquid source. We created a <strong>mobile app that connects via Wi-Fi</strong>, enabling the user to
+          activate the spray, select the spray liquid and monitor the system in real-time.
+        </p>
+        <p>
+          Since the system is cloud-based (Firebase), it does not require any fixed schedules and can be adjusted
+          to fit the field's needs. The switching logic is controlled by the relay, and the voltage circuits ensure
+          the stability of power supply to the various components. We created a <strong>modular design</strong> so
+          we can add soil moisture sensors and weather APIs later and prevent it from spraying during rain.
+        </p>
+        <p>
+          Basically, this is good for any size garden — from a terrace garden to an open field.
+          It is an <strong>affordable and easily scalable solution</strong> to enter the precision farming era.
+          The total component cost remained less than <strong>Rs. 1,500</strong>, and Firebase Spark Plan is free.
+        </p>
+      </div>
+
+      <div class="about-cards reveal">
+        <div class="info-card accent-green">
+          <div class="info-card-icon">🎓</div>
+          <h4>Institution</h4>
+          <p>Delhi Technological University<br/><small>(Formerly Delhi College of Engineering)<br/>Bawana Road, Delhi-110042</small></p>
+        </div>
+        <div class="info-card accent-blue">
+          <div class="info-card-icon">⚡</div>
+          <h4>Department</h4>
+          <p>Electronics &amp; Communication Engineering</p>
+        </div>
+        <div class="info-card accent-yellow">
+          <div class="info-card-icon">👩‍🏫</div>
+          <h4>Supervisor</h4>
+          <p>Dr. Yashna Sharma<br/><small>Assistant Professor, ECE — DTU</small></p>
+        </div>
+        <div class="info-card accent-purple">
+          <div class="info-card-icon">📅</div>
+          <h4>Submitted</h4>
+          <p>May 2026<br/><small>B.Tech Final Year Project<br/>B.Tech in ECE</small></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture layers -->
+    <div class="arch-layers reveal">
+      <h3 class="arch-title">Functional Architecture — Four Layers</h3>
+      <div class="layers">
+        <div class="layer layer-app">
+          <span class="layer-icon">📱</span>
+          <div>
+            <strong>Application Layer — User Interface</strong>
+            <small>Custom Android app. User taps on/off toggle → writes "1" or "0" to Firebase node. No technical expertise required.</small>
+          </div>
+        </div>
+        <div class="layer-arrow">↓</div>
+        <div class="layer layer-cloud">
+          <span class="layer-icon">☁️</span>
+          <div>
+            <strong>Cloud Layer — Firebase RTDB</strong>
+            <small>Holds real-time data. When user issues a request, Firebase updates the particular field and it is read by the ESP-01 in near real-time.</small>
+          </div>
+        </div>
+        <div class="layer-arrow">↓</div>
+        <div class="layer layer-control">
+          <span class="layer-icon">🔌</span>
+          <div>
+            <strong>Control Layer — ESP-01 (ESP8266)</strong>
+            <small>Stays online via callback mechanism. Reads new values and sets GPIO pin HIGH or LOW accordingly. Auto-reconnects on failure.</small>
+          </div>
+        </div>
+        <div class="layer-arrow">↓</div>
+        <div class="layer layer-actuate">
+          <span class="layer-icon">💧</span>
+          <div>
+            <strong>Actuation Layer — Relays · Pump · Solenoid Valves</strong>
+            <small>Relay isolates low-power ESP from high-voltage circuits. Pump pressurises liquid. Solenoid valve opens and closes the flow line.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     PROBLEM STATEMENT & MOTIVATION
+────────────────────────────────────────────────────── -->
+<section class="section section-dark" id="problem">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 1</span>
+      <h2 class="section-title">Problem Statement &amp; Motivation</h2>
+      <p class="section-sub">Why does this project exist?</p>
+    </div>
+
+    <div class="problem-grid">
+      <!-- Introduction text -->
+      <div class="problem-main reveal">
+        <h3>1.1 Introduction</h3>
+        <p>
+          The agriculture sector is still the main pillar of the Indian economy today. It accounts for a colossal share of GDP
+          and the lives of the majority of our population. But on the ground, the methods are still limited to the past —
+          small farms rely nearly exclusively on <strong>manual labour</strong> for basic operations such as chemical spraying
+          and irrigation.
+        </p>
+        <p>
+          Manual spraying has the greatest disadvantage in terms of inefficiency. It is virtually impossible to ensure even
+          application when a chemical has to be applied by a walk-behind heavy tank in poor fields. At times it happens that
+          plants are completely covered with chemicals while the surrounding plants remain dry. Long-term effects of this
+          erratic coverage include <strong>reduced yields and poor soil quality</strong>. The chemicals are also destroyed by
+          evaporation as spraying is often carried out during peak daylight hours. Overnight downpours may simply get rid of
+          the high-cost treatments altogether.
+        </p>
+        <p>
+          The same issue exists in urban areas with rooftop farming and terrace gardens. Smaller-scale systems are in dire
+          need of automated and compact tools since conventional commercial farming equipment is too cumbersome for a home
+          environment. Our project addresses this very technological gap.
+        </p>
+
+        <h3 style="margin-top:28px;">1.2 Motivation</h3>
+        <p>
+          This project began with a rather mundane observation: on most of the small farms and in most of the terrace
+          gardens, the spraying is either manual or controlled by a simple timer. Both are unhealthy for different reasons.
+          Manual spraying is tiring, imprecise and exposes the applicator to pesticide for long periods of time.
+          Timer-based systems are a bit better, but still very dumb — they will spray whether it rained an hour ago or
+          the tank is empty.
+        </p>
+        <p>
+          We spoke to a few people directly involved in this. One operates a rooftop facility in <strong>West Delhi</strong>
+          using a mechanical timer for drip. His principal objection was that he did not know whether it had fired while
+          he was at work. Another small farmer from <strong>Haryana</strong> cited irregular spraying — some rows getting
+          soaked and others barely covered. They didn't have any problem with technology; it was just that they couldn't find
+          anything simple and cheap enough.
+        </p>
+        <p>
+          The <strong>ESP-01 was cheap enough (less than Rs. 150)</strong> and Firebase is a solution that doesn't require
+          creating our own server. The Android app connected them. The intention was not to create anything complicated —
+          just something that's actually used.
+        </p>
+      </div>
+
+      <!-- Problem statement box -->
+      <div class="problem-aside">
+        <div class="problem-statement-box reveal">
+          <h3>1.3 Problem Statement</h3>
+          <p>The prototype must satisfy the following requirements:</p>
+          <ul class="req-list">
+            <li>
+              <span class="req-dot"></span>
+              <div>
+                <strong>Input:</strong> Firebase Realtime Database must receive commands from a user-operated Android app.
+              </div>
+            </li>
+            <li>
+              <span class="req-dot"></span>
+              <div>
+                <strong>Controller:</strong> The ESP-01 must fetch these commands in near real-time and act as the primary controller for activating output devices.
+              </div>
+            </li>
+            <li>
+              <span class="req-dot"></span>
+              <div>
+                <strong>Output:</strong> Based on values read from Firebase, the relay module must switch the solenoid valve and pressure pump on/off, allowing controlled spraying of fluids.
+              </div>
+            </li>
+            <li>
+              <span class="req-dot"></span>
+              <div>
+                <strong>Power-efficient</strong>, easy to install, and compatible with mobile networks via local Wi-Fi.
+              </div>
+            </li>
+            <li>
+              <span class="req-dot"></span>
+              <div>
+                Equally suitable for <strong>rural and urban agricultural setups</strong>.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="need-cards reveal">
+          <div class="need-card">
+            <div class="need-icon">🌾</div>
+            <strong>Agricultural Labour Shortage</strong>
+            <p>Increasing difficulty in finding and retaining labour for manual farming tasks in both rural and urban settings.</p>
+          </div>
+          <div class="need-card">
+            <div class="need-icon">💧</div>
+            <strong>Inconsistent Resource Use</strong>
+            <p>Irregular, inefficient application of water and agrochemicals impacts crop health and yield. Wastage is rampant.</p>
+          </div>
+          <div class="need-card">
+            <div class="need-icon">📡</div>
+            <strong>Tech Intervention Opportunity</strong>
+            <p>Affordable IoT technologies like ESP-01 (₹150) can bring intelligent automation within reach of every farmer.</p>
+          </div>
+          <div class="need-card">
+            <div class="need-icon">♻️</div>
+            <strong>Sustainability</strong>
+            <p>Precision farming optimises resource use, conserves water, and minimises environmental impact from over-spraying.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     LITERATURE SURVEY
+────────────────────────────────────────────────────── -->
+<section class="section" id="literature">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 2</span>
+      <h2 class="section-title">Literature Survey</h2>
+      <p class="section-sub">What already exists, where it falls short, and what SPRINT does differently</p>
+    </div>
+
+    <div class="lit-grid">
+      <div class="lit-main reveal">
+        <h3>2.1 Related Work &amp; Technology</h3>
+        <p>
+          Many research studies and actual projects have illustrated the benefits of implementing smart irrigation
+          using microcontrollers. Consistent themes in the literature include:
+        </p>
+        <ul class="bullet-list">
+          <li>Use of NodeMCU and ESP8266 modules for controlling actuators via smartphone apps</li>
+          <li>Firebase Realtime Database usage for real-time monitoring and remote control</li>
+          <li>Solenoid valves and relay modules for automating the process of fluid delivery</li>
+          <li>Mobile graphical interfaces created with MIT App Inventor, Android Studio, or custom solutions</li>
+        </ul>
+        <p>
+          Our most helpful source was an instructive guide by <em>RandomNerdTutorials</em> on IoT communication
+          control of ESP8266 GPIOs via Firebase. It provided the basic foundation for cloud communication, saving
+          significant time with library integration. Almost all other resources used the bulkier NodeMCU boards
+          or costlier platforms — <strong>justifying the ESP-01 selection</strong> for this project.
+        </p>
+
+        <h3 style="margin-top:28px;">The Gap SPRINT Fills</h3>
+        <p>
+          While existing solutions offer partial automation, there is a clear need for a <strong>low-cost, compact,
+          and modular spraying solution</strong> specifically designed for small-scale farms and urban farming scenarios
+          like terrace gardens. Traditional timer-based systems are rigid and lack adaptability to dynamic agricultural
+          needs, often leading to resource wastage.
+        </p>
+      </div>
+
+      <div class="lit-aside reveal">
+        <h3>2.3 Libraries &amp; Tools Used</h3>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:18px;">
+          A cloud-controlled smart spraying system was successfully implemented on the resource-limited ESP-01 by
+          carefully selecting software libraries. Each tool had to be the best fit — flash memory and RAM on this
+          equipment are extremely low.
+        </p>
+        <div class="lib-list">
+          <div class="lib-item">
+            <span class="lib-num">01</span>
+            <div>
+              <strong>Firebase ESP Client (Mobizt)</strong>
+              <p>Backbone of all communication between ESP8266 and Firebase RTDB. Full CRUD operations, secure token-based auth, real-time data sync, inbuilt reconnection and error handling.</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">02</span>
+            <div>
+              <strong>WiFiManager (by tzapu)</strong>
+              <p>Opens a captive portal at first boot. User sets network SSID and password via a web browser. Credentials stored in EEPROM for future use — no re-flashing ever needed.</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">03</span>
+            <div>
+              <strong>ESP8266WiFi</strong>
+              <p>Core Wi-Fi library. Handles SSID scanning, IP address management, signal monitoring and event handling for disconnections.</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">04</span>
+            <div>
+              <strong>ArduinoJson</strong>
+              <p>All Firebase entries are stored as JSON. ArduinoJson provides efficient, memory-friendly encoding and decoding on the tight ESP-01 heap (96KB RAM).</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">05</span>
+            <div>
+              <strong>ESP8266WebServer</strong>
+              <p>Creates a small HTTP server on ESP-01. Used for a local LAN status page — offline diagnostics without requiring Firebase connectivity.</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">06</span>
+            <div>
+              <strong>DNSServer + ESP_EEPROM</strong>
+              <p>DNSServer hijacks DNS requests to open the captive portal automatically. EEPROM stores Wi-Fi credentials and user-defined spraying preferences across reboots.</p>
+            </div>
+          </div>
+          <div class="lib-item">
+            <span class="lib-num">07</span>
+            <div>
+              <strong>NTPClient + WiFiUDP</strong>
+              <p>Gets current time from an NTP server — used for time-stamped logging and scheduling timed spraying tasks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     HOW IT WORKS
+────────────────────────────────────────────────────── -->
+<section class="section section-dark" id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 4 — Working Principle</span>
+      <h2 class="section-title">How SPRINT Works</h2>
+      <p class="section-sub">Six steps from user intent to precision spraying — entirely over the cloud</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="tl-number">01</div>
+        <div class="tl-icon">📱</div>
+        <div class="tl-content">
+          <h3>User Command Initiation</h3>
+          <p>A command issued by the user from within the mobile application — pressing a button such as "Start Spraying" — sends a key-value pair entry into the Firebase Realtime Database via JSON (<code>spray_status: "on"</code>). Selection of spray mode includes options like "Start Spray" or "Stop Spray" along with real-time monitoring of operation status.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="tl-number">02</div>
+        <div class="tl-icon">☁️</div>
+        <div class="tl-content">
+          <h3>Firebase Modification</h3>
+          <p>This command triggers modification of a certain key entry in the Firebase database in real-time. The user makes a request through the application, Firebase updates the particular field, and it is read by the ESP-01 module in near real-time. The cloud layer also provides opportunities for collecting historical data and conducting analytics.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="tl-number">03</div>
+        <div class="tl-icon">📡</div>
+        <div class="tl-content">
+          <h3>ESP-01 Data Polling</h3>
+          <p>The ESP-01 device always listens to any changes made to the database via the Firebase ESP Client library callback mechanism — therefore, there is no need for periodic polling. This results in near real-time speed. Wi-Fi connection time from initialisation using WiFiManager: <strong>four to six seconds</strong>. Data sync time: <strong>under one second</strong>.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="tl-number">04</div>
+        <div class="tl-icon">🧠</div>
+        <div class="tl-content">
+          <h3>Logical Decision Making</h3>
+          <p>The microcontroller evaluates the value of <code>spray_status</code> and determines whether the GPIO-connected pin should be set to HIGH or LOW. All code has been programmed in the Arduino IDE using non-blocking code for real-time operation. Connection issues are covered by a safety mechanism of automatic network reconnection.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="tl-number">05</div>
+        <div class="tl-icon">⚙️</div>
+        <div class="tl-content">
+          <h3>Relay Activation</h3>
+          <p>The relay activates, energising both the <strong>12V DC pressure pump</strong> and the <strong>24V DC solenoid valve</strong> simultaneously. The relay module maintains isolation between the microcontroller circuitry and the current-drawing hardware components — the sensitive ESP-01 electronics are protected. As a result, liquid is taken inside and sprayed out from the nozzle in one action.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="tl-number">06</div>
+        <div class="tl-icon">💧</div>
+        <div class="tl-content">
+          <h3>Spraying Process &amp; Shutdown</h3>
+          <p>The system sprays until the user issues a "Stop" command through the app or a built-in timeout fires (e.g., 10 seconds — automatic system shut-down). GPIO pin is set to LOW, the relay goes off, spraying stops. The entire procedure allows <strong>total remote control</strong>, making usage highly efficient and reducing wastage significantly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block diagram text -->
+    <div class="block-diagram reveal">
+      <h3>4.3 System Block Diagram</h3>
+      <div class="block-flow">
+        <div class="block-node app-node">📱<br/><strong>Mobile App</strong><br/><small>Writes user commands</small></div>
+        <div class="block-arrow">→</div>
+        <div class="block-node firebase-node">☁️<br/><strong>Firebase</strong><br/><small>Provides updates</small></div>
+        <div class="block-arrow">→</div>
+        <div class="block-node esp-node">🔌<br/><strong>ESP-01</strong><br/><small>Wi-Fi connection</small></div>
+        <div class="block-arrow">→</div>
+        <div class="block-node relay-node">⚡<br/><strong>Relay Module</strong><br/><small>Activates output</small></div>
+        <div class="block-arrow">→</div>
+        <div class="block-node act-node">💧<br/><strong>Valve / Pump</strong><br/><small>Nozzle → Target area</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     HARDWARE COMPONENTS
+────────────────────────────────────────────────────── -->
+<section class="section" id="hardware">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 3 — Hardware</span>
+      <h2 class="section-title">Hardware Requirements</h2>
+      <p class="section-sub">Carefully selected for reliability, cost-effectiveness, and agricultural suitability — all from Lajpat Rai Market</p>
+    </div>
+
+    <div class="components-grid">
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap green">
+          <svg viewBox="0 0 40 40" class="comp-svg"><rect x="5" y="10" width="30" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="20" r="3" fill="currentColor"/><rect x="18" y="17" width="12" height="2" rx="1" fill="currentColor"/><rect x="18" y="21" width="8" height="2" rx="1" fill="currentColor"/></svg>
+        </div>
+        <h3>ESP-01 (ESP8266)</h3>
+        <span class="comp-role">Core Control Unit · WiFi MCU</span>
+        <p>The entire task of central processing is done through this microcontroller. Through this inexpensive yet extremely small module, wireless communication capabilities can be achieved in conjunction with cloud-based Firebase. It requires a steady 3.3V supply and supports two GPIOs — GPIO0 and GPIO2 — used with the relay module and LEDs. Instantaneous actuation takes place as it constantly listens to Firebase for any change in states. Cost: <strong>Rs. 80–100 in Lajpat Rai.</strong></p>
+        <div class="comp-spec">3.3V · GPIO0 + GPIO2 · IEEE 802.11 b/g/n · 96KB RAM · 512KB Flash</div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap blue">
+          <svg viewBox="0 0 40 40" class="comp-svg"><rect x="8" y="12" width="24" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="28" r="2" fill="currentColor"/></svg>
+        </div>
+        <h3>Relay Module</h3>
+        <span class="comp-role">5V Single-Channel · Power Switch</span>
+        <p>Handles the difficult task of interfacing the ESP-01 with high-voltage circuits such as 12V DC solenoid valves and pumps. The relay module maintains <strong>isolation between the microcontroller circuitry and the current-drawing hardware</strong> — protecting the sensitive ESP-01. Dry contact operation tests showed millisecond response. Load operation demonstrated reliable actuation of solenoids and pumps continuously.</p>
+        <div class="comp-spec">5V coil · Single-channel · ESP-01 compatible · 10A rated contacts</div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap yellow">
+          <svg viewBox="0 0 40 40" class="comp-svg"><ellipse cx="20" cy="20" rx="12" ry="8" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="20" x2="2" y2="20" stroke="currentColor" stroke-width="2"/><line x1="32" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3>Solenoid Valve (24V DC)</h3>
+        <span class="comp-role">Liquid Flow Control · Normally Closed</span>
+        <p>Controls the movement of liquids — water, insecticide, and fertilizer — stored in separate external tanks. Activated or deactivated according to signals received from Firebase via the relay. Tested three variants: 12V DC (poor flow rate at high pressure), <strong>24V DC (selected — quick, tight seal)</strong>, and 220V AC (slow, noisy, required additional insulation). The 24V version proved most effective.</p>
+        <div class="comp-spec">24V DC · Normally closed · 1/2″ inlet · Powered via MT3608 booster</div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap purple">
+          <svg viewBox="0 0 40 40" class="comp-svg"><rect x="12" y="8" width="16" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Pressure Pump (12V DC)</h3>
+        <span class="comp-role">Water Pressurisation · Mini Diaphragm</span>
+        <p>Creates the force necessary to push fluid through a nozzle directed at the plant or crop. Can be turned on or off using the relay module. Tested multiple 12V pumps and selected based on: a constant flow of water ideal for spraying, ability to withstand dry operation periods, and performance when working with load generated by the relay. There is <strong>one unified inlet pipe</strong> — the operator simply fills an external tank with the required fluid.</p>
+        <div class="comp-spec">12V DC · Mini diaphragm · Relay-controlled · Direct 12V power line</div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap orange">
+          <svg viewBox="0 0 40 40" class="comp-svg"><rect x="6" y="14" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 14 L10 8 L16 8" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M30 14 L30 8 L24 8" stroke="currentColor" stroke-width="1.5" fill="none"/><text x="11" y="23" font-size="7" fill="currentColor" font-family="monospace">LM2596</text></svg>
+        </div>
+        <h3>LM2596 Buck Converter</h3>
+        <span class="comp-role">Step-Down · 12V → 3.3V for ESP-01</span>
+        <p>Lowers the power rail voltage from 12V to the 3.3V required by the ESP-01 and relay module. The output voltage remains constant and protected from over-voltage conditions. Critical for preventing the microcontroller from voltage spikes — some components failed during early testing before this was established. Tried 5V/1A adapter (couldn't run both ESP and relay simultaneously) and 5V/2A (not adequate for solenoid and pump simultaneously) before settling on the 12V + converter approach.</p>
+        <div class="comp-spec">Input: up to 40V · Output: 3.3V–35V adjustable · Efficient step-down</div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-icon-wrap teal">
+          <svg viewBox="0 0 40 40" class="comp-svg"><rect x="6" y="14" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 26 L10 32 L16 32" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M30 26 L30 32 L24 32" stroke="currentColor" stroke-width="1.5" fill="none"/><text x="11" y="23" font-size="7" fill="currentColor" font-family="monospace">MT3608</text></svg>
+        </div>
+        <h3>MT3608 Boost Converter</h3>
+        <span class="comp-role">Step-Up · 12V → 24V for Solenoid</span>
+        <p>Boosts the power rail voltage from 12V to the 24V DC needed to actuate the solenoid valve. Separate power lines are maintained for the pump and ESP to prevent interference and ensure consistent power delivery. The modular approach proved beneficial here — switching from a 12V to a 24V solenoid valve was relatively easy thanks to the boost converter in place.</p>
+        <div class="comp-spec">Input: 2–24V · Output: up to 28V · Isolated power path for solenoid</div>
+      </div>
+
+    </div>
+
+    <!-- Power flow -->
+    <div class="power-flow reveal">
+      <h3>Final Power Configuration (Chapter 5.2.3)</h3>
+      <p class="power-sub">No battery used — voltage fluctuations from Li-ion batteries can damage the module. AC adapter is safer.</p>
+      <div class="power-diagram">
+        <div class="pwr-node source">🔌<br/><strong>12V 2A DC Adapter</strong><br/><small>Main power supply (AC → DC)</small></div>
+        <div class="pwr-arrow">→</div>
+        <div class="pwr-split">
+          <div class="pwr-node buck">⬇️<br/><strong>LM2596 Buck</strong><br/><small>→ 3.3V for ESP-01 &amp; Relay</small></div>
+          <div class="pwr-node boost">⬆️<br/><strong>MT3608 Boost</strong><br/><small>→ 24V for Solenoid Valve</small></div>
+          <div class="pwr-node direct">➡️<br/><strong>Direct 12V</strong><br/><small>→ DC Pressure Pump</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components table -->
+    <div class="comp-table-wrap reveal">
+      <h3>Components Used in the Final Prototype (Table 7.2)</h3>
+      <table class="results-table">
+        <thead>
+          <tr><th>Component</th><th>Specification</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Microcontroller</td><td><span class="tag green">ESP-01 (ESP8266)</span></td></tr>
+          <tr><td>Relay Module</td><td><span class="tag blue">Single-channel, ESP-01 compatible</span></td></tr>
+          <tr><td>Solenoid Valve</td><td><span class="tag yellow">24V DC</span></td></tr>
+          <tr><td>Pressure Pump</td><td><span class="tag yellow">12V DC (mini diaphragm pump)</span></td></tr>
+          <tr><td>Power Adapter</td><td><span class="tag green">12V 2A DC</span></td></tr>
+          <tr><td>Boost Converter</td><td><span class="tag blue">MT3608 (12V → 24V)</span></td></tr>
+          <tr><td>Buck Converter</td><td><span class="tag green">LM2596 (12V → 3.3V)</span></td></tr>
+          <tr><td>Connecting Wires</td><td><span class="tag blue">Male-to-female jumper wires</span></td></tr>
+          <tr><td>PCB Board</td><td><span class="tag blue">Optional — for compact circuit assembly</span></td></tr>
+          <tr><td>Protective Enclosure</td><td><span class="tag green">Waterproof plastic container</span></td></tr>
+          <tr><td>LED Indicators</td><td><span class="tag yellow">Power status indicators</span></td></tr>
+          <tr><td>Switches &amp; Jumpers</td><td><span class="tag yellow">Manual override in case of malfunction</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     SOFTWARE STACK
+────────────────────────────────────────────────────── -->
+<section class="section section-dark" id="software">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 3 — Software</span>
+      <h2 class="section-title">Software Requirements</h2>
+      <p class="section-sub">Open-source tools chosen for rapid prototyping, zero licensing cost, and proven Firebase stability</p>
+    </div>
+
+    <div class="stack-grid">
+
+      <div class="stack-card reveal">
+        <div class="stack-badge">Development Tools</div>
+        <div class="stack-items">
+          <div class="stack-item">
+            <span class="stack-dot green"></span>
+            <div>
+              <strong>Arduino IDE</strong>
+              <small>Used for writing all firmware for the ESP-01. Supports ESP8266 boards via the Board Manager. Enables inclusion of Firebase and WiFiManager libraries. Includes Serial Monitor for real-time debug output. Code is written in non-blocking style for real-time operation.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot green"></span>
+            <div>
+              <strong>Android Studio</strong>
+              <small>Develops the mobile application that interfaces with the Firebase server. Provides users (farmers or system administrators) remote control over the spraying system along with operational status updates. Uses ConstraintLayout UI for a responsive interface.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card reveal">
+        <div class="stack-badge">Cloud Backend</div>
+        <div class="stack-items">
+          <div class="stack-item">
+            <span class="stack-dot yellow"></span>
+            <div>
+              <strong>Firebase Realtime Database (RTDB)</strong>
+              <small>Serverless backend. All sensor data and command values are stored using a JSON tree structure that supports hierarchical control logic. Completely free under the Firebase Spark Plan — no server costs.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot yellow"></span>
+            <div>
+              <strong>Firebase Authentication</strong>
+              <small>Utilized for access management. Firebase Security Rules are defined for limiting users' read/write permission to specific nodes. Token-based authentication ensures secure data transmission.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot yellow"></span>
+            <div>
+              <strong>Firebase ESP Client (Mobizt)</strong>
+              <small>Establishes two-way asynchronous communication between ESP-01 and Firebase RTDB. Provides security features and ensures reliable JSON data synchronization. Inbuilt reconnection — critical for unattended agricultural deployments.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card reveal">
+        <div class="stack-badge">Debugging Tools</div>
+        <div class="stack-items">
+          <div class="stack-item">
+            <span class="stack-dot purple"></span>
+            <div>
+              <strong>Serial Monitor (Arduino IDE)</strong>
+              <small>Monitors logs generated by the ESP-01 in real-time during development and testing sessions.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot purple"></span>
+            <div>
+              <strong>ESP Exception Decoder</strong>
+              <small>The ESP-01 tends to crash at times and provides undecipherable stack traces. This tool converts them to meaningful function calls and corresponding files — invaluable for debugging firmware crashes.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot purple"></span>
+            <div>
+              <strong>Android Studio Logcat</strong>
+              <small>Shows all logs, exceptions, and system information during Android app execution. Connection errors with Firebase and UI lag become obvious using this tool.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot purple"></span>
+            <div>
+              <strong>ESP8266WebServer (LAN status page)</strong>
+              <small>A small HTTP server on ESP-01 creates a local status page accessible over LAN — used for offline testing and diagnostics when Firebase is temporarily unavailable.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card reveal">
+        <div class="stack-badge">Open-Source Benefits</div>
+        <div class="stack-items">
+          <div class="stack-item">
+            <span class="stack-dot blue"></span>
+            <div>
+              <strong>Cost Efficiency</strong>
+              <small>Free major libraries and development tools. No proprietary software or hardware-specific SDKs required. Entire system built, tested, and deployed within a student budget of under Rs. 1,500.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot blue"></span>
+            <div>
+              <strong>Community Support</strong>
+              <small>A large group of global developers maintain the project's libraries. Multiple GitHub helpers means no unsolvable errors.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot blue"></span>
+            <div>
+              <strong>Rapid Prototyping</strong>
+              <small>Platforms like Arduino IDE make prototyping extremely easy and accessible — simply connect the module to a laptop and it is instantly recognized.</small>
+            </div>
+          </div>
+          <div class="stack-item">
+            <span class="stack-dot blue"></span>
+            <div>
+              <strong>Scalability</strong>
+              <small>This firmware, coded for the ESP-01, can be adapted for more capable boards such as ESP-32 with virtually no modification — future-proofing the investment.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     EXPERIMENTATION & RESULTS
+────────────────────────────────────────────────────── -->
+<section class="section" id="results">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 5</span>
+      <h2 class="section-title">Experimentation &amp; Results</h2>
+      <p class="section-sub">The design process was quite challenging — numerous tests had to be carried out to find appropriate components that would work effectively, reliably, and within budget</p>
+    </div>
+
+    <!-- MCU Selection -->
+    <div class="exp-block reveal">
+      <h3>5.1 Microcontroller Assessment — Why ESP-01?</h3>
+      <p>The choice of microcontroller was possibly the most important decision in the construction process. Many boards underwent testing before one emerged victorious.</p>
+      <div class="mcu-grid">
+        <div class="mcu-card rejected">
+          <div class="mcu-status">❌ Rejected</div>
+          <strong>ESP-32</strong>
+          <small>Unreliable flashing; power wastage through unused Bluetooth; increased consumption. First candidate tested.</small>
+        </div>
+        <div class="mcu-card rejected">
+          <div class="mcu-status">❌ Rejected</div>
+          <strong>ESP32-CAM</strong>
+          <small>Camera consumed considerable memory; Firebase actions took time; costly and complex — no vision application needed.</small>
+        </div>
+        <div class="mcu-card rejected">
+          <div class="mcu-status">❌ Rejected</div>
+          <strong>Raspberry Pi 3B+</strong>
+          <small>Slow boot time; SD card damage risk; more energy consumed; excessive for this project.</small>
+        </div>
+        <div class="mcu-card rejected">
+          <div class="mcu-status">❌ Rejected</div>
+          <strong>NodeMCU</strong>
+          <small>Relatively bigger in size; more power-consuming; good performance but not better than ESP-01 with Firebase.</small>
+        </div>
+        <div class="mcu-card rejected">
+          <div class="mcu-status">❌ Rejected</div>
+          <strong>H5 Stack</strong>
+          <small>Expensive for a basic spraying device; the screen and accessories were unnecessary; consumed a lot of power.</small>
+        </div>
+        <div class="mcu-card selected">
+          <div class="mcu-status">✅ Selected</div>
+          <strong>ESP-01 (ESP8266)</strong>
+          <small>Compact, cost-efficient, stable Firebase performance with lightweight libraries, quick Wi-Fi recovery after failures.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Power Supply Testing -->
+    <div class="exp-block reveal">
+      <h3>5.2 Power Supply Testing</h3>
+      <p>Various AC to DC adapters were tried. Multiple combinations were evaluated because the relay, ESP-01, solenoid valve, and pressure pump all operate at different voltage levels.</p>
+      <div class="power-test-grid">
+        <div class="ptest-item fail">
+          <span class="ptest-badge">❌ Failed</span>
+          <strong>5V / 1A Adapter</strong>
+          <p>Could not support running both ESP and relays simultaneously. Relays would not switch on with load.</p>
+        </div>
+        <div class="ptest-item fail">
+          <span class="ptest-badge">❌ Insufficient</span>
+          <strong>5V / 2A or 3A Adapter</strong>
+          <p>Better than previous but not adequate for running solenoid and pump simultaneously.</p>
+        </div>
+        <div class="ptest-item partial">
+          <span class="ptest-badge">⚠️ Partial</span>
+          <strong>12V DC Adapter (standalone)</strong>
+          <p>Worked reasonably well for relays and small loads, but required converters for ESP and solenoid voltages.</p>
+        </div>
+        <div class="ptest-item fail">
+          <span class="ptest-badge">⚠️ Risky</span>
+          <strong>24V DC Adapter</strong>
+          <p>Sufficient for heavy-duty solenoids, but risky for use directly with ESP-01 (rated 3.3V).</p>
+        </div>
+        <div class="ptest-item pass">
+          <span class="ptest-badge">✅ Final Choice</span>
+          <strong>12V 2A + LM2596 + MT3608</strong>
+          <p>12V 2A main supply → LM2596 (→3.3V for ESP) + MT3608 (→24V for solenoid) + direct 12V for pump. Worked perfectly.</p>
+        </div>
+      </div>
+      <p class="exp-note">⚠️ Battery power was <strong>not implemented</strong> — voltage fluctuation problems from Li-ion batteries could damage the ESP module.</p>
+    </div>
+
+    <!-- Connectivity Tests -->
+    <div class="exp-block reveal">
+      <h3>5.4 Connectivity &amp; Cloud Communication Tests</h3>
+      <div class="conn-results">
+        <div class="conn-item">
+          <div class="conn-metric">4–6 sec</div>
+          <div class="conn-label">Wi-Fi connection time from boot via WiFiManager</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-metric">&lt;1 sec</div>
+          <div class="conn-label">Firebase command data sync time (app → hardware)</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-metric">2+ hrs</div>
+          <div class="conn-label">Continuous stable Wi-Fi connection in testing</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-metric">15–20 sec</div>
+          <div class="conn-label">Reconnection time after Wi-Fi connectivity loss</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-metric">30+ runs</div>
+          <div class="conn-label">Full test cycles — zero data losses or command delays</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-metric">Token Auth</div>
+          <div class="conn-label">Secure Firebase data transmission confirmed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environmental Tests -->
+    <div class="exp-block reveal">
+      <h3>5.6 Environmental &amp; Field Adaptability Tests</h3>
+      <div class="env-grid">
+        <div class="env-item">
+          <span class="env-icon">🛡️</span>
+          <strong>Waterproof Enclosure</strong>
+          <p>System components enclosed within a waterproof plastic container for field deployment.</p>
+        </div>
+        <div class="env-item">
+          <span class="env-icon">🧹</span>
+          <strong>Dust Filtering</strong>
+          <p>A simple filter mechanism added to the nozzle to prevent clogging in dusty environments.</p>
+        </div>
+        <div class="env-item">
+          <span class="env-icon">🌡️</span>
+          <strong>15°C – 40°C</strong>
+          <p>Reliable operation confirmed across the full temperature range typical of Indian farming conditions.</p>
+        </div>
+        <div class="env-item">
+          <span class="env-icon">📶</span>
+          <strong>Up to 20 Metres</strong>
+          <p>Reliable Wi-Fi transmission up to 20 metres. Signal repeaters can extend this range further.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <div class="results-table-wrap reveal">
+      <h3>Table 5.1 — Summary of Findings</h3>
+      <table class="results-table">
+        <thead>
+          <tr><th>Component</th><th>Final Choice / Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Microcontroller</td><td><span class="tag green">ESP-01 with Firebase ESP Client (Mobizt)</span></td></tr>
+          <tr><td>Power Source</td><td><span class="tag blue">12V 2A DC adapter + LM2596 (buck) + MT3608 (boost)</span></td></tr>
+          <tr><td>Relay Module</td><td><span class="tag green">ESP-01 relay module · Single-channel · Opto-isolated</span></td></tr>
+          <tr><td>Solenoid Valve</td><td><span class="tag yellow">24V DC · Normally-closed · Quick open/close</span></td></tr>
+          <tr><td>Pressure Pump</td><td><span class="tag yellow">12V DC mini diaphragm pump</span></td></tr>
+          <tr><td>Cloud Platform</td><td><span class="tag blue">Firebase RTDB — responsive, secure, free Spark plan</span></td></tr>
+          <tr><td>Connectivity</td><td><span class="tag green">Stable within 20 m · Fast reconnection (15–20 sec)</span></td></tr>
+          <tr><td>Environmental</td><td><span class="tag green">Waterproof casing · Dust mesh · 15°C–40°C</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Commercial comparison -->
+    <div class="comm-compare reveal">
+      <h3>Table 7.1 — Commercial Comparison: HiOazo Smart Controller vs. SPRINT</h3>
+      <div class="compare-grid">
+        <div class="compare-col hiOazo">
+          <h4>🏪 HiOazo Smart Controller</h4>
+          <ul>
+            <li><span class="vs-label">Cost</span> <strong>Rs. 6,202</strong></li>
+            <li><span class="vs-label">Ecosystem</span> Closed and proprietary. Component failure often requires full replacement.</li>
+            <li><span class="vs-label">Plumbing</span> Localized controller; often requires proprietary commercial valves separately.</li>
+            <li><span class="vs-label">Customization</span> Locked software with predefined features (4 zones, 16 plans).</li>
+            <li><span class="vs-label">Target</span> Premium home users with standardized garden setups.</li>
+          </ul>
+        </div>
+        <div class="compare-col sprint-col">
+          <h4>🌿 SPRINT (Proposed System)</h4>
+          <ul>
+            <li><span class="vs-label">Cost</span> <strong>Under Rs. 1,500 total</strong></li>
+            <li><span class="vs-label">Ecosystem</span> Modular and open-source. Inexpensive, easily replaceable components (relays, valves, controllers).</li>
+            <li><span class="vs-label">Plumbing</span> Simplified. Single pipe inlet reduces complexity, cost, and maintenance overhead.</li>
+            <li><span class="vs-label">Customization</span> Highly adaptable to different scales, zones, or conditions. Future sensor integration easily achievable.</li>
+            <li><span class="vs-label">Target</span> Small-scale farmers or urban gardeners who want entry-level automation without spending a fortune.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     CONCLUSION
+────────────────────────────────────────────────────── -->
+<section class="section section-dark" id="conclusion">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Chapter 6</span>
+      <h2 class="section-title">Conclusion</h2>
+      <p class="section-sub">In general, we were happy with the results of our efforts</p>
+    </div>
+
+    <div class="conclusion-grid">
+      <div class="conclusion-text reveal">
+        <p>
+          As it was mentioned at the very beginning, the main task was to construct a <strong>practical, rather than a
+          theoretical solution</strong>. And we believe that it was fulfilled. The choice of the board proved correct.
+          We tried several other models prior to using ESP-01 but as was shown by the testing of Chapter 5, the
+          choice was justified.
+        </p>
+        <p>
+          Used in combination with Firebase and an Android app, the system operated successfully in all test cycles.
+          Speaking about the problems, there was some difficulty concerning the selection of optimal parameters for
+          powering the sensors and the board. Some components failed before we could establish a correct set of
+          parameters, however, the final one using a 12V 2A source along with LM2596 and MT3608 did its job well.
+        </p>
+        <p>
+          The system was <strong>successfully tested even from outside of college premises</strong>, demonstrating
+          true remote control. The modular approach proved beneficial — switching from a 12V solenoid valve to the
+          24V model was relatively easy thanks to the architecture.
+        </p>
+        <p>
+          The system demonstrated above proves what can be achieved by utilizing the concepts of <strong>embedded
+          systems, IoT, and cloud computing</strong> on the basis of a practical application. This is currently a
+          reliable platform which will only get better once some additional fine tuning and inclusion of environmental
+          monitoring devices take place, making this system a complete precision agriculture technology solution.
+        </p>
+      </div>
+
+      <div class="pros-cons reveal">
+        <div class="pros-box">
+          <h4>✅ Pros</h4>
+          <ul>
+            <li>Cheap parts cost — ESP-01 &amp; relay module together cost less than <strong>Rs. 200</strong></li>
+            <li>System can be controlled from <strong>anywhere on the internet</strong></li>
+            <li>Successfully tested <strong>from outside college premises</strong></li>
+            <li>All parts readily available in <strong>Lajpat Rai Market</strong></li>
+            <li>Minimal idle power consumption when not spraying</li>
+            <li><strong>Firebase Spark Plan was free</strong> — zero cloud costs</li>
+            <li>Easy maintenance due to modular open-source architecture</li>
+          </ul>
+        </div>
+        <div class="cons-box">
+          <h4>⚠️ Cons</h4>
+          <ul>
+            <li>ESP-01 comes with just <strong>two GPIO ports</strong> that can be used</li>
+            <li>Incorporating additional sensors was challenging due to insufficient GPIO count</li>
+            <li>Entire operation relies entirely on <strong>WiFi connectivity</strong></li>
+            <li>No alternative plan in place in case internet connection fails</li>
+            <li>Mobile application works but its <strong>user interface is very simple</strong></li>
+            <li>UI enhancement was not taken into account during development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Scope -->
+    <div class="section-header reveal" style="margin-top:72px;">
+      <span class="section-tag">6.2 Future Scope</span>
+      <h2 class="section-title">Future Enhancements</h2>
+      <p class="section-sub">The system functions as intended but can be expanded — here are the planned directions</p>
+    </div>
+
+    <div class="future-grid">
+      <div class="future-card reveal">
+        <div class="fc-num">01</div>
+        <div class="fc-icon">🌡️</div>
+        <h3>Sensor Integration</h3>
+        <p>Adding <strong>soil moisture, temperature, and humidity sensors</strong> for automatic, condition-based spraying. Currently, one major drawback of the system is the lack of awareness of the environmental situation around it. An incorporation of even a simple soil moisture sensor would make it possible for the ESP-01 to autonomously determine whether spraying is necessary. Since we're limited by the number of GPIO pins, we might want to switch to an <strong>ESP-32</strong> for such functionality, which also provides Bluetooth control.</p>
+      </div>
+
+      <div class="future-card reveal">
+        <div class="fc-num">02</div>
+        <div class="fc-icon">🌦️</div>
+        <h3>Weather API Integration</h3>
+        <p>Connecting to <strong>OpenWeatherMap API</strong> to access real-time weather forecasts and prevent spraying during rainfall or adverse conditions. During testing, the system once sprayed right before rain began — that is a complete waste of water and chemicals. An API from OpenWeatherMap could solve this issue and ensure resource efficiency.</p>
+      </div>
+
+      <div class="future-card reveal">
+        <div class="fc-num">03</div>
+        <div class="fc-icon">☀️</div>
+        <h3>Solar Power Integration</h3>
+        <p>Incorporating <strong>solar panels for off-grid operation</strong>, making the system ideal for remote fields lacking reliable power infrastructure. The amount of idle power used by ESP-01 is very small — a solar panel and battery pack can effectively power it, making it usable in fields far away from the electricity grid.</p>
+      </div>
+
+      <div class="future-card reveal">
+        <div class="fc-num">04</div>
+        <div class="fc-icon">📵</div>
+        <h3>Offline Local Control</h3>
+        <p>Introducing fallback options like <strong>Bluetooth or physical pushbuttons</strong> for control during internet outages, enhancing system resilience. There is currently no alternative plan in case the internet connection fails — the local LAN WebServer provides partial offline diagnostics but not full control.</p>
+      </div>
+
+      <div class="future-card reveal">
+        <div class="fc-num">05</div>
+        <div class="fc-icon">📊</div>
+        <h3>Mobile App Enhancement</h3>
+        <p>Upgrading the mobile interface with <strong>graphical dashboards, voice command support, multi-zone control</strong>, and scheduled spraying features. Currently there is an on/off toggle for turning the machine on and off; however, more features such as scheduling and logging need to be implemented. UI enhancement was not a focus of v1.</p>
+      </div>
+
+      <div class="future-card reveal">
+        <div class="fc-num">06</div>
+        <div class="fc-icon">🔗</div>
+        <h3>Multi-Inlet Plumbing</h3>
+        <p>Redesigning for <strong>multiple pipe inlets with individual solenoid valves per zone</strong>. Currently, the entire system uses one unified inlet pipe. Multiple inlets with individual solenoids would significantly increase the practical value of the system for larger farm setups with multiple liquid types.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     TEAM
+────────────────────────────────────────────────────── -->
+<section class="section" id="team">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">The People</span>
+      <h2 class="section-title">Meet the Team</h2>
+      <p class="section-sub">B.Tech Electronics &amp; Communication Engineering, Delhi Technological University · May 2026</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-initials">AK</div>
+        </div>
+        <h3>Anurag Kumar</h3>
+        <span class="team-roll">Roll No. 2K22/EC/46</span>
+        <p class="team-desc">B.Tech ECE final year student at Delhi Technological University. Co-developer of SPRINT — contributed to hardware design, ESP-01 firmware development, Firebase integration, and system architecture.</p>
+        <div class="team-skills">
+          <span>ESP8266</span><span>Firebase</span><span>Arduino IDE</span><span>IoT</span>
+        </div>
+      </div>
+
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-initials">CS</div>
+        </div>
+        <h3>Chirag Sikriwal</h3>
+        <span class="team-roll">Roll No. 2K22/EC/75</span>
+        <p class="team-desc">B.Tech ECE final year student at Delhi Technological University. Co-developer of SPRINT — contributed to circuit design, power management (LM2596/MT3608 configuration), and Android mobile app development.</p>
+        <div class="team-skills">
+          <span>Android Studio</span><span>Circuit Design</span><span>Power Management</span>
+        </div>
+      </div>
+
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-initials">DD</div>
+        </div>
+        <h3>Devayush Devandra</h3>
+        <span class="team-roll">Roll No. 2K22/EC/88</span>
+        <p class="team-desc">B.Tech ECE final year student at Delhi Technological University. Co-developer of SPRINT — contributed to system experimentation, component testing (MCU selection, relay and solenoid valve trials), and prototype validation.</p>
+        <div class="team-skills">
+          <span>Prototyping</span><span>Hardware Testing</span><span>Documentation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="supervisor-card reveal">
+      <div class="sup-avatar">YS</div>
+      <div class="sup-info">
+        <h3>Dr. Yashna Sharma</h3>
+        <span>Project Supervisor</span>
+        <p>Assistant Professor, Department of Electronics &amp; Communication Engineering, Delhi Technological University (Formerly Delhi College of Engineering), Bawana Road, Delhi-110042.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────
+     FOOTER
+────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
         <span class="logo-s">S</span><span class="logo-print">PRINT</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about"      class="nav-link">About</a></li>
-        <li><a href="#how"        class="nav-link">How It Works</a></li>
-        <li><a href="#components" class="nav-link">Components</a></li>
-        <li><a href="#advantages" class="nav-link">Advantages</a></li>
-        <li><a href="#results"    class="nav-link">Results</a></li>
-        <li><a href="#future"     class="nav-link">Future</a></li>
-        <li><a href="#team"       class="nav-link">Team</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
-  <section class="hero" id="hero">
-    <!-- Animated background particles -->
-    <div class="hero-bg">
-      <div class="particle" style="--x:10%;--y:20%;--s:6px;--d:4s"></div>
-      <div class="particle" style="--x:85%;--y:15%;--s:4px;--d:6s"></div>
-      <div class="particle" style="--x:30%;--y:70%;--s:8px;--d:5s"></div>
-      <div class="particle" style="--x:70%;--y:60%;--s:5px;--d:7s"></div>
-      <div class="particle" style="--x:50%;--y:40%;--s:3px;--d:4.5s"></div>
-      <div class="particle" style="--x:20%;--y:80%;--s:7px;--d:5.5s"></div>
-      <div class="particle" style="--x:90%;--y:75%;--s:4px;--d:6.5s"></div>
-      <div class="particle" style="--x:60%;--y:10%;--s:6px;--d:3.5s"></div>
-    </div>
-
-    <!-- SVG Farm Illustration -->
-    <div class="hero-illustration">
-      <svg viewBox="0 0 600 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="farm-svg">
-        <!-- Ground -->
-        <rect x="0" y="220" width="600" height="80" fill="url(#groundGrad)" rx="4"/>
-        <!-- Rows of crops -->
-        <g class="crop-row" style="--delay:0s">
-          <path d="M60 220 Q65 190 70 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M70 220 Q75 195 80 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M80 220 Q85 185 90 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <ellipse cx="75" cy="192" rx="12" ry="8" fill="#16a34a" opacity="0.9"/>
-        </g>
-        <g class="crop-row" style="--delay:0.3s">
-          <path d="M150 220 Q155 190 160 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M160 220 Q165 195 170 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M170 220 Q175 185 180 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <ellipse cx="165" cy="192" rx="12" ry="8" fill="#16a34a" opacity="0.9"/>
-        </g>
-        <g class="crop-row" style="--delay:0.6s">
-          <path d="M240 220 Q245 190 250 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M250 220 Q255 195 260 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M260 220 Q265 185 270 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <ellipse cx="255" cy="192" rx="12" ry="8" fill="#16a34a" opacity="0.9"/>
-        </g>
-        <g class="crop-row" style="--delay:0.9s">
-          <path d="M330 220 Q335 190 340 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M340 220 Q345 195 350 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <path d="M350 220 Q355 185 360 220" stroke="#4ade80" stroke-width="2" fill="none"/>
-          <ellipse cx="345" cy="192" rx="12" ry="8" fill="#16a34a" opacity="0.9"/>
-        </g>
-
-        <!-- Sprayer device -->
-        <g class="sprayer">
-          <rect x="440" y="160" width="60" height="40" rx="6" fill="#1e3a2f" stroke="#4ade80" stroke-width="1.5"/>
-          <rect x="455" y="150" width="30" height="15" rx="3" fill="#166534" stroke="#4ade80" stroke-width="1"/>
-          <circle cx="470" cy="145" r="5" fill="#4ade80" class="led-blink"/>
-          <rect x="500" y="174" width="40" height="4" rx="2" fill="#4ade80"/>
-          <!-- Spray nozzles -->
-          <line x1="510" y1="174" x2="510" y2="220" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4 3" class="spray-line" style="--delay:0s"/>
-          <line x1="520" y1="174" x2="515" y2="220" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4 3" class="spray-line" style="--delay:0.2s"/>
-          <line x1="530" y1="174" x2="520" y2="220" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4 3" class="spray-line" style="--delay:0.4s"/>
-          <line x1="538" y1="174" x2="532" y2="220" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4 3" class="spray-line" style="--delay:0.1s"/>
-        </g>
-
-        <!-- WiFi signal arcs from device -->
-        <g class="wifi-arcs">
-          <path d="M445 140 Q460 120 475 140" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.9" class="wifi-arc" style="--delay:0s"/>
-          <path d="M435 128 Q460 100 485 128" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.7" class="wifi-arc" style="--delay:0.3s"/>
-          <path d="M425 116 Q460 80 495 116" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.5" class="wifi-arc" style="--delay:0.6s"/>
-        </g>
-
-        <!-- Cloud icon -->
-        <g class="cloud-group" style="transform:translateX(0)">
-          <ellipse cx="120" cy="60" rx="40" ry="25" fill="#1e3a2f" opacity="0.95"/>
-          <ellipse cx="95"  cy="72" rx="20" ry="15" fill="#1e3a2f" opacity="0.95"/>
-          <ellipse cx="145" cy="68" rx="22" ry="16" fill="#1e3a2f" opacity="0.95"/>
-          <text x="101" y="67" font-size="11" fill="#4ade80" font-family="monospace">Firebase</text>
-        </g>
-
-        <!-- Data flow line cloud → device -->
-        <path d="M160 72 Q300 30 440 155" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-dasharray="6 4" class="data-flow"/>
-
-        <!-- Phone icon -->
-        <g class="phone-group">
-          <rect x="30" y="110" width="28" height="48" rx="4" fill="#1e3a2f" stroke="#4ade80" stroke-width="1.5"/>
-          <rect x="34" y="116" width="20" height="32" rx="2" fill="#052e16"/>
-          <circle cx="44" cy="153" r="3" fill="#4ade80"/>
-          <text x="36" y="128" font-size="5" fill="#4ade80" font-family="monospace">APP</text>
-          <text x="36" y="136" font-size="4" fill="#86efac" font-family="monospace">START</text>
-        </g>
-        <!-- Phone → Cloud arrow -->
-        <path d="M58 134 Q80 100 80 80" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-dasharray="4 3" class="data-flow" style="--delay:0.5s"/>
-
-        <!-- Gradient defs -->
-        <defs>
-          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#14532d"/>
-            <stop offset="100%" stop-color="#052e16"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-badge reveal">
-        <span class="badge-dot"></span>
-        B.Tech Project · ECE · DTU · 2026
+        <p>Smart Precision Remote Irrigation Network Technology<br/>
+        <small>A Remote and Timer-Controlled Smart Spraying System for Precision Agriculture</small></p>
       </div>
-      <h1 class="hero-title reveal">
-        <span class="title-s">S</span>PRINT
-      </h1>
-      <p class="hero-subtitle reveal">Smart Precision Remote Irrigation Network Technology</p>
-      <p class="hero-desc reveal">
-        A remote and timer-controlled <strong>smart spraying system</strong> for precision agriculture —
-        powered by ESP-01, Firebase &amp; an Android mobile app.
-      </p>
-      <div class="hero-cta reveal">
-        <a href="#about"  class="btn btn-primary">Explore Project</a>
-        <a href="#team"   class="btn btn-ghost">Meet the Team</a>
-      </div>
-
-      <!-- Stat chips -->
-      <div class="hero-stats reveal">
-        <div class="stat-chip"><span class="stat-num">100%</span><span class="stat-label">Wireless</span></div>
-        <div class="stat-chip"><span class="stat-num">Real-Time</span><span class="stat-label">Cloud Control</span></div>
-        <div class="stat-chip"><span class="stat-num">≤20m</span><span class="stat-label">Wi-Fi Range</span></div>
-        <div class="stat-chip"><span class="stat-num">Open-Source</span><span class="stat-label">Stack</span></div>
+      <div class="footer-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#problem">Problem</a>
+        <a href="#how">How It Works</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#results">Results</a>
+        <a href="#conclusion">Conclusion</a>
+        <a href="#team">Team</a>
       </div>
     </div>
-
-    <div class="hero-scroll-hint">
-      <span>Scroll to explore</span>
-      <div class="scroll-arrow"></div>
+    <div class="footer-bottom">
+      <p>© 2026 SPRINT Project &nbsp;·&nbsp; Delhi Technological University &nbsp;·&nbsp; Department of ECE</p>
+      <p class="footer-built">Built with Node.js · Express · Deployed on Vercel 🚀</p>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- ─── ABOUT ─────────────────────────────────────────────────────────────── -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Abstract</span>
-        <h2 class="section-title">What is SPRINT?</h2>
-        <p class="section-sub">An intelligent IoT solution bridging the gap between traditional farming and modern automation</p>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            SPRINT is an affordable, cloud-connected smart spraying system designed to automate the distribution of
-            <strong>water, pesticides, and liquid fertilizers</strong> in farms and gardens.
-            Built using an <strong>ESP-01 Wi-Fi microcontroller</strong>, a relay, voltage regulators, a 12V pressure pump,
-            and solenoid valves — all orchestrated from a central liquid source.
-          </p>
-          <p>
-            Instead of old-school timers with blind schedules, SPRINT pairs with a custom <strong>Android mobile app</strong>
-            that lets the user activate the spray, choose the liquid type, and monitor the system in real-time —
-            anywhere, anytime. The <strong>Firebase Realtime Database</strong> serves as the cloud backbone,
-            eliminating fixed schedules and adapting to field needs dynamically.
-          </p>
-          <p>
-            The modular architecture is designed for future expansion: soil moisture sensors and weather APIs
-            can be integrated to prevent over-spraying or spraying during rain —
-            making it equally suitable for <em>terrace gardens</em> and <em>open agricultural fields</em>.
-          </p>
-        </div>
-
-        <div class="about-cards reveal">
-          <div class="info-card accent-green">
-            <div class="info-card-icon">🎓</div>
-            <h4>Institution</h4>
-            <p>Delhi Technological University<br/><small>(Formerly Delhi College of Engineering)</small></p>
-          </div>
-          <div class="info-card accent-blue">
-            <div class="info-card-icon">⚡</div>
-            <h4>Department</h4>
-            <p>Electronics &amp; Communication Engineering</p>
-          </div>
-          <div class="info-card accent-yellow">
-            <div class="info-card-icon">👩‍🏫</div>
-            <h4>Supervisor</h4>
-            <p>Dr. Yashna Sharma<br/><small>Assistant Professor, ECE</small></p>
-          </div>
-          <div class="info-card accent-purple">
-            <div class="info-card-icon">📅</div>
-            <h4>Year</h4>
-            <p>May 2026<br/><small>B.Tech Final Year Project</small></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Architecture layers -->
-      <div class="arch-layers reveal">
-        <h3 class="arch-title">Functional Architecture</h3>
-        <div class="layers">
-          <div class="layer layer-app">
-            <span class="layer-icon">📱</span>
-            <div>
-              <strong>Application Layer</strong>
-              <small>Android Mobile App (User Interface)</small>
-            </div>
-          </div>
-          <div class="layer-arrow">↓</div>
-          <div class="layer layer-cloud">
-            <span class="layer-icon">☁️</span>
-            <div>
-              <strong>Cloud Layer</strong>
-              <small>Firebase Realtime Database (RTDB)</small>
-            </div>
-          </div>
-          <div class="layer-arrow">↓</div>
-          <div class="layer layer-control">
-            <span class="layer-icon">🔌</span>
-            <div>
-              <strong>Control Layer</strong>
-              <small>ESP-01 Microcontroller (Wi-Fi MCU)</small>
-            </div>
-          </div>
-          <div class="layer-arrow">↓</div>
-          <div class="layer layer-actuate">
-            <span class="layer-icon">💧</span>
-            <div>
-              <strong>Actuation Layer</strong>
-              <small>Relays · Pressure Pump · Solenoid Valves</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── HOW IT WORKS ─────────────────────────────────────────────────────── -->
-  <section class="section section-dark" id="how">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Working Principle</span>
-        <h2 class="section-title">How SPRINT Works</h2>
-        <p class="section-sub">Six elegant steps from user intent to precision spraying</p>
-      </div>
-
-      <div class="timeline">
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">01</div>
-          <div class="tl-icon">📱</div>
-          <div class="tl-content">
-            <h3>User Command</h3>
-            <p>The user initiates spraying via the mobile app — tapping "Start Spraying" or selecting a liquid type (water / pesticide / fertilizer).</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">02</div>
-          <div class="tl-icon">☁️</div>
-          <div class="tl-content">
-            <h3>Firebase Update</h3>
-            <p>The app writes a specific key-value pair to the <strong>Firebase Realtime Database</strong>. The cloud acts as the message broker between phone and hardware.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">03</div>
-          <div class="tl-icon">📡</div>
-          <div class="tl-content">
-            <h3>ESP-01 Data Polling</h3>
-            <p>The ESP-01 continuously monitors Firebase, fetching new values in real-time over Wi-Fi. No polling delay — it reacts as soon as the database changes.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">04</div>
-          <div class="tl-icon">🧠</div>
-          <div class="tl-content">
-            <h3>Logical Decision</h3>
-            <p>The microcontroller evaluates the received value and decides whether to activate its GPIO pin — translating cloud commands to hardware signals.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">05</div>
-          <div class="tl-icon">⚙️</div>
-          <div class="tl-content">
-            <h3>Relay Activation</h3>
-            <p>The relay module energises the <strong>12V pressure pump</strong> and the <strong>24V solenoid valve</strong> simultaneously, opening the liquid flow path.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="tl-number">06</div>
-          <div class="tl-icon">💧</div>
-          <div class="tl-content">
-            <h3>Spraying Process</h3>
-            <p>The system sprays the field until a "stop" command is sent via the app or a programmed timeout occurs — no manual intervention needed.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── COMPONENTS ───────────────────────────────────────────────────────── -->
-  <section class="section" id="components">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Hardware</span>
-        <h2 class="section-title">Key Components</h2>
-        <p class="section-sub">Carefully selected for reliability, cost-effectiveness, and agricultural suitability</p>
-      </div>
-
-      <div class="components-grid">
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap green">
-            <svg viewBox="0 0 40 40" class="comp-svg"><rect x="5" y="10" width="30" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="20" r="3" fill="currentColor"/><rect x="18" y="17" width="12" height="2" rx="1" fill="currentColor"/><rect x="18" y="21" width="8" height="2" rx="1" fill="currentColor"/></svg>
-          </div>
-          <h3>ESP-01 (ESP8266)</h3>
-          <span class="comp-role">Core Control Unit · WiFi MCU</span>
-          <p>Ultra-compact Wi-Fi microcontroller chosen after testing ESP-32, NodeMCU, Raspberry Pi 3B+, and H5 Stack. Best balance of size, power consumption, and Firebase compatibility.</p>
-          <div class="comp-spec">3.3V · 2 GPIO pins · IEEE 802.11 b/g/n</div>
-        </div>
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap blue">
-            <svg viewBox="0 0 40 40" class="comp-svg"><rect x="8" y="12" width="24" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="28" r="2" fill="currentColor"/></svg>
-          </div>
-          <h3>Relay Module</h3>
-          <span class="comp-role">Switch · Power Controller</span>
-          <p>Single-channel ESP-01 compatible relay that safely switches high-voltage pump and solenoid circuits from the low-power 3.3V GPIO output of the microcontroller.</p>
-          <div class="comp-spec">Single-channel · ESP-01 compatible · 10A rating</div>
-        </div>
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap yellow">
-            <svg viewBox="0 0 40 40" class="comp-svg"><ellipse cx="20" cy="20" rx="12" ry="9" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="20" x2="2" y2="20" stroke="currentColor" stroke-width="2"/><line x1="32" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2"/><path d="M17 14 Q20 20 17 26" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M23 14 Q20 20 23 26" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-          </div>
-          <h3>Pressure Pump</h3>
-          <span class="comp-role">12V DC · Water Pressurisation</span>
-          <p>Mini diaphragm pump providing the pressure needed to deliver liquid through the spray nozzle system. Controlled via the relay for clean on/off switching.</p>
-          <div class="comp-spec">12V DC · Mini diaphragm · Relay-controlled</div>
-        </div>
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap purple">
-            <svg viewBox="0 0 40 40" class="comp-svg"><rect x="12" y="8" width="16" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="8" x2="20" y2="15" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="25" x2="20" y2="32" stroke="currentColor" stroke-width="1.5"/></svg>
-          </div>
-          <h3>Solenoid Valve</h3>
-          <span class="comp-role">24V DC · Liquid Flow Control</span>
-          <p>Electromagnetic valve that opens and closes the liquid pathway on command. Requires 24V, supplied by the MT3608 boost converter from the 12V main line.</p>
-          <div class="comp-spec">24V DC · Normally closed · 1/2" inlet</div>
-        </div>
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap orange">
-            <svg viewBox="0 0 40 40" class="comp-svg"><rect x="6" y="14" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 14 L10 8 L16 8" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M30 14 L30 8 L24 8" stroke="currentColor" stroke-width="1.5" fill="none"/><text x="12" y="23" font-size="7" fill="currentColor" font-family="monospace">12V 2A</text></svg>
-          </div>
-          <h3>LM2596 Buck Converter</h3>
-          <span class="comp-role">Step-Down · 12V → 3.3V</span>
-          <p>Steps the 12V main supply down to the stable 3.3V required by the ESP-01. Critical for preventing the microcontroller from voltage spikes that caused earlier component failures.</p>
-          <div class="comp-spec">Input: 12V · Output: 3.3V · Efficient step-down</div>
-        </div>
-
-        <div class="comp-card reveal">
-          <div class="comp-icon-wrap teal">
-            <svg viewBox="0 0 40 40" class="comp-svg"><rect x="6" y="14" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 26 L10 32 L16 32" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M30 26 L30 32 L24 32" stroke="currentColor" stroke-width="1.5" fill="none"/><text x="12" y="23" font-size="7" fill="currentColor" font-family="monospace">24V↑</text></svg>
-          </div>
-          <h3>MT3608 Boost Converter</h3>
-          <span class="comp-role">Step-Up · 12V → 24V</span>
-          <p>Boosts the 12V supply to the 24V needed to actuate the solenoid valve. Separate power lines ensure stable delivery to both the ESP and the high-voltage actuation components.</p>
-          <div class="comp-spec">Input: 12V · Output: 24V · Isolated power path</div>
-        </div>
-
-      </div>
-
-      <!-- Power flow diagram -->
-      <div class="power-flow reveal">
-        <h3>Power Management Flow</h3>
-        <div class="power-diagram">
-          <div class="pwr-node source">🔌<br/><strong>12V 2A</strong><br/><small>DC Adapter</small></div>
-          <div class="pwr-arrow">→</div>
-          <div class="pwr-split">
-            <div class="pwr-node buck">⬇️<br/><strong>LM2596</strong><br/><small>→ 3.3V (ESP-01)</small></div>
-            <div class="pwr-node boost">⬆️<br/><strong>MT3608</strong><br/><small>→ 24V (Solenoid)</small></div>
-            <div class="pwr-node direct">➡️<br/><strong>Direct</strong><br/><small>→ 12V (Pump)</small></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── SOFTWARE STACK ───────────────────────────────────────────────────── -->
-  <section class="section section-dark" id="software">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Software</span>
-        <h2 class="section-title">Technology Stack</h2>
-        <p class="section-sub">Open-source tools chosen for rapid prototyping, low cost, and robust Firebase integration</p>
-      </div>
-
-      <div class="stack-grid">
-        <div class="stack-card reveal">
-          <div class="stack-badge">IoT Firmware</div>
-          <div class="stack-items">
-            <div class="stack-item">
-              <span class="stack-dot green"></span>
-              <div>
-                <strong>Arduino IDE</strong>
-                <small>C++ firmware development for ESP-01. Manages Firebase Client library integration and Serial monitoring.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot green"></span>
-              <div>
-                <strong>Firebase ESP Client</strong>
-                <small>Connects ESP-01 to Firebase RTDB. Handles authentication, read/write, and real-time streaming.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot green"></span>
-              <div>
-                <strong>WiFiManager</strong>
-                <small>Captive-portal Wi-Fi setup. Lets the device join new networks without re-flashing firmware.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot green"></span>
-              <div>
-                <strong>ArduinoJson</strong>
-                <small>Fast, memory-efficient JSON parsing for cloud data structures. Critical on ESP-01's 96KB RAM.</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stack-card reveal">
-          <div class="stack-badge">Mobile App</div>
-          <div class="stack-items">
-            <div class="stack-item">
-              <span class="stack-dot blue"></span>
-              <div>
-                <strong>Android Studio</strong>
-                <small>Full Android app development. Provides a user-friendly UI with connectivity status, liquid selection, and real-time feedback.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot blue"></span>
-              <div>
-                <strong>Firebase Android SDK</strong>
-                <small>Reads and writes to Firebase RTDB from the phone. Provides authentication and real-time listeners.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot blue"></span>
-              <div>
-                <strong>ConstraintLayout UI</strong>
-                <small>Responsive Android UI layout system. Renders control buttons and status indicators cleanly.</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stack-card reveal">
-          <div class="stack-badge">Cloud Backend</div>
-          <div class="stack-items">
-            <div class="stack-item">
-              <span class="stack-dot yellow"></span>
-              <div>
-                <strong>Firebase RTDB</strong>
-                <small>Serverless real-time database. JSON tree structure stores device commands hierarchically. Free Spark plan used.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot yellow"></span>
-              <div>
-                <strong>Firebase Authentication</strong>
-                <small>Secures device-to-cloud and app-to-cloud communication with token-based auth.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot yellow"></span>
-              <div>
-                <strong>ESP8266WebServer</strong>
-                <small>Local LAN status page for offline diagnostics — displays system state without Firebase connectivity.</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stack-card reveal">
-          <div class="stack-badge">Web Showcase</div>
-          <div class="stack-items">
-            <div class="stack-item">
-              <span class="stack-dot purple"></span>
-              <div>
-                <strong>Node.js + Express</strong>
-                <small>Lightweight server to host this project showcase. Serves static assets and exposes a project metadata API.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot purple"></span>
-              <div>
-                <strong>Vanilla Angular-style SPA</strong>
-                <small>Modular, component-driven JavaScript with scroll-triggered animations and a responsive layout system.</small>
-              </div>
-            </div>
-            <div class="stack-item">
-              <span class="stack-dot purple"></span>
-              <div>
-                <strong>Vercel Deployment</strong>
-                <small>Serverless Node.js hosting with automatic HTTPS, CDN, and zero-config deployments from GitHub.</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── ADVANTAGES ───────────────────────────────────────────────────────── -->
-  <section class="section" id="advantages">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Benefits</span>
-        <h2 class="section-title">Advantages of SPRINT</h2>
-        <p class="section-sub">Designed from the ground up to be affordable, scalable, and farmer-friendly</p>
-      </div>
-
-      <div class="adv-grid">
-
-        <div class="adv-card reveal" style="--accent:#4ade80">
-          <div class="adv-icon">💰</div>
-          <h3>Cost-Effective</h3>
-          <p>Inexpensive open-source components (ESP-01 costs a fraction of commercial controllers). All parts sourced from Lajpat Rai Market. Firebase Spark Plan is free.</p>
-          <div class="adv-vs">
-            <span class="vs-item bad">HiOazo Smart Controller: ₹6,202</span>
-            <span class="vs-item good">SPRINT: Highly affordable</span>
-          </div>
-        </div>
-
-        <div class="adv-card reveal" style="--accent:#60a5fa">
-          <div class="adv-icon">⚡</div>
-          <h3>Real-Time Cloud Control</h3>
-          <p>Firebase integration ensures <strong>immediate remote actuation</strong> with negligible delay. Commands propagate from phone to hardware in milliseconds.</p>
-        </div>
-
-        <div class="adv-card reveal" style="--accent:#fbbf24">
-          <div class="adv-icon">📡</div>
-          <h3>Wireless Operation</h3>
-          <p>Operable from <strong>anywhere with internet access</strong> — perfect for remote farms, greenhouses, and urban terrace gardens. No wired control panels needed.</p>
-        </div>
-
-        <div class="adv-card reveal" style="--accent:#a78bfa">
-          <div class="adv-icon">🧩</div>
-          <h3>Modular &amp; Scalable</h3>
-          <p>Open, modular design allows future integration of soil moisture sensors, temperature/humidity sensors, and weather APIs for condition-based spraying.</p>
-          <div class="adv-tag">Open-source ecosystem</div>
-        </div>
-
-        <div class="adv-card reveal" style="--accent:#34d399">
-          <div class="adv-icon">🌱</div>
-          <h3>Energy Efficient</h3>
-          <p>Minimal idle power consumption when not spraying. ESP-01 draws &lt;1mA in deep-sleep mode, making it compatible with a solar panel + battery pack setup.</p>
-        </div>
-
-        <div class="adv-card reveal" style="--accent:#f87171">
-          <div class="adv-icon">📲</div>
-          <h3>User-Friendly Interface</h3>
-          <p>Intuitive Android app requires <strong>no technical expertise</strong>. Displays connectivity status, liquid-type selection buttons, and real-time system feedback.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── RESULTS ──────────────────────────────────────────────────────────── -->
-  <section class="section section-dark" id="results">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Experimentation</span>
-        <h2 class="section-title">Results &amp; Findings</h2>
-        <p class="section-sub">Rigorous testing across microcontrollers, power supply, relay, connectivity, and field conditions</p>
-      </div>
-
-      <!-- Summary table -->
-      <div class="results-table-wrap reveal">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Final Choice / Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Microcontroller</td><td><span class="tag green">ESP-01 with Firebase ESP Client</span></td></tr>
-            <tr><td>Power Source</td><td><span class="tag blue">12V 2A DC · LM2596 (buck) + MT3608 (boost)</span></td></tr>
-            <tr><td>Relay Module</td><td><span class="tag green">ESP-01 relay module · Single-channel</span></td></tr>
-            <tr><td>Solenoid Valve</td><td><span class="tag yellow">24V DC · Normally-closed</span></td></tr>
-            <tr><td>Pressure Pump</td><td><span class="tag yellow">12V DC mini diaphragm pump</span></td></tr>
-            <tr><td>Cloud Platform</td><td><span class="tag blue">Firebase RTDB — responsive &amp; secure</span></td></tr>
-            <tr><td>Wi-Fi Range</td><td><span class="tag green">Stable within 20 m; extendable via repeaters</span></td></tr>
-            <tr><td>Temperature Range</td><td><span class="tag green">Reliable 15°C – 40°C operation</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- MCU comparison -->
-      <div class="mcu-compare reveal">
-        <h3>Microcontroller Selection Journey</h3>
-        <div class="mcu-grid">
-          <div class="mcu-card rejected">
-            <div class="mcu-status">❌ Rejected</div>
-            <strong>ESP-32</strong>
-            <small>Overpowered for task; higher cost</small>
-          </div>
-          <div class="mcu-card rejected">
-            <div class="mcu-status">❌ Rejected</div>
-            <strong>ESP32-CAM</strong>
-            <small>Camera module — unnecessary overhead</small>
-          </div>
-          <div class="mcu-card rejected">
-            <div class="mcu-status">❌ Rejected</div>
-            <strong>Raspberry Pi 3B+</strong>
-            <small>Slow boot, SD card issues, power-heavy</small>
-          </div>
-          <div class="mcu-card rejected">
-            <div class="mcu-status">❌ Rejected</div>
-            <strong>NodeMCU</strong>
-            <small>Larger, more power-hungry than ESP-01</small>
-          </div>
-          <div class="mcu-card rejected">
-            <div class="mcu-status">❌ Rejected</div>
-            <strong>H5 Stack</strong>
-            <small>Feature-rich but overkill for scope</small>
-          </div>
-          <div class="mcu-card selected">
-            <div class="mcu-status">✅ Selected</div>
-            <strong>ESP-01 (ESP8266)</strong>
-            <small>Smallest, lowest power, perfect Firebase fit</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CHALLENGES ───────────────────────────────────────────────────────── -->
-  <section class="section" id="challenges">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Limitations</span>
-        <h2 class="section-title">Challenges &amp; Honest Trade-offs</h2>
-        <p class="section-sub">Every engineering solution involves trade-offs — here's what SPRINT acknowledges</p>
-      </div>
-
-      <div class="challenge-grid">
-        <div class="challenge-card reveal">
-          <div class="ch-icon">📶</div>
-          <h4>Wi-Fi in Rural Fields</h4>
-          <p>Stable internet access in remote agricultural fields can be unreliable. SPRINT requires connectivity for Firebase communication — an offline fallback is not yet implemented.</p>
-          <div class="ch-mitigation">
-            <strong>Planned fix:</strong> Bluetooth / physical pushbuttons as fallback
-          </div>
-        </div>
-        <div class="challenge-card reveal">
-          <div class="ch-icon">💾</div>
-          <h4>Limited GPIO Pins</h4>
-          <p>ESP-01 has only 2 usable GPIO pins, making multi-sensor integration difficult. Adding soil moisture or humidity sensors would require migrating to ESP-32.</p>
-          <div class="ch-mitigation">
-            <strong>Planned fix:</strong> Upgrade to ESP-32 for v2.0
-          </div>
-        </div>
-        <div class="challenge-card reveal">
-          <div class="ch-icon">⚡</div>
-          <h4>Power Stability</h4>
-          <p>Multiple components with different voltage requirements led to early component failures during testing. The final LM2596 + MT3608 combo resolved this with separate isolated power lines.</p>
-          <div class="ch-mitigation">
-            <strong>Status:</strong> Resolved in final prototype
-          </div>
-        </div>
-        <div class="challenge-card reveal">
-          <div class="ch-icon">🌐</div>
-          <h4>Cloud Dependency</h4>
-          <p>Entire operation relies on internet availability. During a connectivity outage, the system is inoperative. No local control mode exists in the current version.</p>
-          <div class="ch-mitigation">
-            <strong>Planned fix:</strong> Local LAN fallback via ESP WebServer
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FUTURE SCOPE ─────────────────────────────────────────────────────── -->
-  <section class="section section-dark" id="future">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">Roadmap</span>
-        <h2 class="section-title">Future Scope &amp; Enhancements</h2>
-        <p class="section-sub">SPRINT v1 is the foundation — here's where it goes next</p>
-      </div>
-
-      <div class="future-grid">
-
-        <div class="future-card reveal">
-          <div class="fc-num">01</div>
-          <div class="fc-icon">🌡️</div>
-          <h3>Sensor Integration</h3>
-          <p>Adding soil moisture, temperature, and humidity sensors for <strong>automatic, condition-based spraying</strong> — the system decides when crops actually need water, not a fixed timer.</p>
-        </div>
-
-        <div class="future-card reveal">
-          <div class="fc-num">02</div>
-          <div class="fc-icon">🌦️</div>
-          <h3>Weather API Integration</h3>
-          <p>Connecting to <strong>OpenWeatherMap API</strong> to prevent spraying during rainfall or adverse conditions. During testing, the system once sprayed right before rain — this fix eliminates that waste.</p>
-        </div>
-
-        <div class="future-card reveal">
-          <div class="fc-num">03</div>
-          <div class="fc-icon">☀️</div>
-          <h3>Solar Power</h3>
-          <p>Incorporating solar panels for <strong>off-grid operation</strong>. ESP-01's minimal idle power draw makes it ideal for solar + battery pack configurations in remote fields.</p>
-        </div>
-
-        <div class="future-card reveal">
-          <div class="fc-num">04</div>
-          <div class="fc-icon">📵</div>
-          <h3>Offline Local Control</h3>
-          <p>Fallback to <strong>Bluetooth or physical pushbuttons</strong> for control during internet outages — enhancing system resilience for areas with unreliable connectivity.</p>
-        </div>
-
-        <div class="future-card reveal">
-          <div class="fc-num">05</div>
-          <div class="fc-icon">📊</div>
-          <h3>Mobile App Enhancement</h3>
-          <p>Upgrading the app with <strong>graphical dashboards, voice commands, multi-zone control</strong>, and scheduled spraying features. Current UI is functional but minimal.</p>
-        </div>
-
-        <div class="future-card reveal">
-          <div class="fc-num">06</div>
-          <div class="fc-icon">🔗</div>
-          <h3>Multi-Inlet Plumbing</h3>
-          <p>Redesigning for <strong>multiple pipe inlets with individual solenoid valves</strong> per zone — significantly increasing practical value for larger farm setups.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── TEAM ─────────────────────────────────────────────────────────────── -->
-  <section class="section" id="team">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-tag">The People</span>
-        <h2 class="section-title">Meet the Team</h2>
-        <p class="section-sub">B.Tech Electronics &amp; Communication Engineering, Delhi Technological University</p>
-      </div>
-
-      <div class="team-grid">
-
-        <div class="team-card reveal">
-          <div class="team-avatar">
-            <div class="avatar-ring"></div>
-            <div class="avatar-initials">AK</div>
-          </div>
-          <h3>Anurag Kumar</h3>
-          <span class="team-roll">2K22/EC/46</span>
-          <p class="team-desc">ECE final year student at DTU. Co-developer of SPRINT — contributed to hardware design, ESP-01 firmware, and Firebase integration.</p>
-          <div class="team-skills">
-            <span>ESP8266</span><span>Firebase</span><span>Arduino</span>
-          </div>
-        </div>
-
-        <div class="team-card reveal">
-          <div class="team-avatar">
-            <div class="avatar-ring"></div>
-            <div class="avatar-initials">CS</div>
-          </div>
-          <h3>Chirag Sikriwal</h3>
-          <span class="team-roll">2K22/EC/75</span>
-          <p class="team-desc">ECE final year student at DTU. Co-developer of SPRINT — contributed to circuit design, power management, and mobile app development.</p>
-          <div class="team-skills">
-            <span>Android Studio</span><span>Circuit Design</span><span>IoT</span>
-          </div>
-        </div>
-
-        <div class="team-card reveal">
-          <div class="team-avatar">
-            <div class="avatar-ring"></div>
-            <div class="avatar-initials">DD</div>
-          </div>
-          <h3>Devayush Devandra</h3>
-          <span class="team-roll">2K22/EC/88</span>
-          <p class="team-desc">ECE final year student at DTU. Co-developer of SPRINT — contributed to system testing, experimentation, and prototype validation.</p>
-          <div class="team-skills">
-            <span>Prototyping</span><span>Testing</span><span>Documentation</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Supervisor card -->
-      <div class="supervisor-card reveal">
-        <div class="sup-avatar">YS</div>
-        <div class="sup-info">
-          <h3>Dr. Yashna Sharma</h3>
-          <span>Project Supervisor</span>
-          <p>Assistant Professor, Department of Electronics &amp; Communication Engineering, Delhi Technological University</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─── FOOTER ───────────────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <span class="logo-s">S</span><span class="logo-print">PRINT</span>
-          <p>Smart Precision Remote Irrigation Network Technology</p>
-        </div>
-        <div class="footer-links">
-          <a href="#about">About</a>
-          <a href="#how">How It Works</a>
-          <a href="#components">Components</a>
-          <a href="#results">Results</a>
-          <a href="#team">Team</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 SPRINT Project · Delhi Technological University · ECE Department</p>
-        <p class="footer-built">Built with Node.js · Express · Deployed on Vercel 🚀</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
