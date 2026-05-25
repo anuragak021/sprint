@@ -58,6 +58,9 @@ const SprintApp = (() => {
 
   /* ── Reveal on Scroll ────────────────────────────────── */
   const initReveal = () => {
+    // Add js-ready so CSS hides elements for animation
+    document.body.classList.add('js-ready');
+
     const elements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver(
@@ -69,7 +72,7 @@ const SprintApp = (() => {
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
     );
 
     elements.forEach(el => observer.observe(el));
